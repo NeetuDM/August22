@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Diagnostics;
 
 //open chrome browser
 IWebDriver driver = new ChromeDriver();
@@ -33,3 +34,56 @@ else
     Console.WriteLine("Login failed,test failed.");
 
 }
+// Create new Time record 
+
+//Identify Administration dropdown menu and click
+IWebElement AdministrationTab = driver.FindElement(By.XPath("/ html / body / div[3] / div / div / ul / li[5] / a"));
+AdministrationTab.Click();
+IWebElement TimeandMaterialoption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
+TimeandMaterialoption.Click();
+
+//Identify Create new button and click
+IWebElement CreateNewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
+CreateNewButton.Click();
+
+//Identify TypeCode and select Time
+IWebElement TypeCodeDropdown = driver.FindElement(By.XPath("//*[@id=\'TimeMaterialEditForm\']/div/div[1]/div/span[1]/span/span[1]"));
+TypeCodeDropdown.Click();
+
+//Identify Code Textbox and enter value
+IWebElement CodeButton = driver.FindElement(By.Id("Code"));
+CodeButton.SendKeys("Neet2022");
+
+//Identigy Description Textbox and enter value
+IWebElement DescriptionTextBox = driver.FindElement(By.Id("Description"));
+DescriptionTextBox.SendKeys("Data");
+
+//Identify Price per unit and enter value
+IWebElement PriceperunitTag = driver.FindElement(By.XPath("//*[@id=\'TimeMaterialEditForm\']/div/div[4]/div/span[1]/span/input[1]"));
+PriceperunitTag.Click();
+
+IWebElement PriceperunitTextbox = driver.FindElement(By.Id("Price"));
+PriceperunitTextbox.SendKeys("78");
+
+//Identify Save button and click
+
+IWebElement SaveButton = driver.FindElement(By.Id("SaveButton"));
+SaveButton.Click();
+Thread.Sleep(3000);
+
+//Check if the new record is present in the table
+
+IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[4]/a[4]/span"));
+goToLastPageButton.Click();
+
+IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
+
+if (newCode.Text == "Neet2022")
+{
+   Console.WriteLine("Time record created sucessfully");
+}
+else
+{
+   Console.WriteLine("Time record hasn't been created");
+}
+
