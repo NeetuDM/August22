@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Diagnostics;
+using System.Threading;
 
 //open chrome browser
 IWebDriver driver = new ChromeDriver();
@@ -71,7 +72,7 @@ IWebElement SaveButton = driver.FindElement(By.Id("SaveButton"));
 SaveButton.Click();
 Thread.Sleep(3000);
 
-//Check if the new record is present in the table
+//Got the the last page to Check if the new record is present in the table
 
 IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[4]/a[4]/span"));
 goToLastPageButton.Click();
@@ -87,3 +88,55 @@ else
    Console.WriteLine("Time record hasn't been created");
 }
 
+//Create new Material record
+
+//Navigate to Time & Material page
+IWebElement administationTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
+administationTab.Click();
+
+IWebElement TimeandmaterialTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
+TimeandmaterialTab.Click();
+
+//Identify Create New Button and CLick
+IWebElement CreatenewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
+CreatenewButton.Click();
+
+//Identify CodeTextBox and Enter value
+IWebElement CodeTextBox = driver.FindElement(By.Id("Code"));
+CodeTextBox.SendKeys("Sept");
+
+//Identify Description TextBox and Enter value
+IWebElement DescriptionBox = driver.FindElement(By.Id("Description"));
+DescriptionBox.SendKeys("Auto123");
+
+//Identify PriceperUnitTextBox and Enter value
+IWebElement PricePerUnitTag = driver.FindElement(By.XPath("//*[@id=\'TimeMaterialEditForm\']/div/div[4]/div/span[1]/span/input[1]"));
+PricePerUnitTag.Click();
+IWebElement PricePUTextBox = driver.FindElement(By.Id("Price"));
+PricePUTextBox.SendKeys("200");
+Thread.Sleep(2000);
+
+// Identify Save Button and click
+IWebElement SaveButtonA = driver.FindElement(By.Id("SaveButton"));
+SaveButtonA.Click();
+Thread.Sleep(2000);
+
+//Got to the last page and check if new Material data added to the table
+
+//Click on Go to the Last page
+IWebElement GototheLastPage = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+GototheLastPage.Click();
+IWebElement NewRecord = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
+
+//Check if new Material record added to the last page
+
+if (NewRecord.Text== "Sept")
+
+{
+    Console.WriteLine("Material new record created sucessfully, test passed");
+
+}
+else
+{
+    Console.WriteLine("Material record has not been added, test failed");
+}
