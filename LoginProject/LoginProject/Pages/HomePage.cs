@@ -19,6 +19,11 @@ namespace LoginProject.Pages
 
         }
 
+        public void GoToEmployeePage(IWebDriver driver)
+        {
+             //Navigate to the Employee page
+
+        }
 
     }
 }
