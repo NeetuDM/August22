@@ -11,52 +11,31 @@ using System.Threading.Tasks;
 namespace LoginProject.Tests
 {
     [TestFixture]
+    [Parallelizable]
     public class Employee_Tests : CommonDriver
     {
-        [SetUp]
-
-        public void LoginActions()
-        {
-            //open chrome browser
-            driver = new ChromeDriver();
-
-            //Login page object initialization and definition
-            LoginPage loginPageObj = new LoginPage();
-            loginPageObj.LoginSteps(driver);
-
-            //Home page object initialization and definition
-            HomePage homePageObj = new HomePage();
-            homePageObj.GoToEmployeePage(driver);
-
-        }
+        HomePage homePageObj = new HomePage();
+        EmployeePage employeePageObj = new EmployeePage();
 
         [Test]
         public void CreateEmployee()
         {
-            EmployeePage employeePageObj = new EmployeePage();
+            homePageObj.GoToEmployeePage(driver);
             employeePageObj.CreateEmployee(driver);
         }
 
         [Test]
         public void EditEmployee()
         {
-            EmployeePage employeePageObj = new EmployeePage();
+            homePageObj.GoToEmployeePage(driver);
             employeePageObj.EditEmployee(driver);
         }
 
         [Test]
         public void DeleteEmployee()
         {
-            EmployeePage employeePageObj = new EmployeePage();
+            homePageObj.GoToEmployeePage(driver);
             employeePageObj.DeleteEmployee(driver);
         }
-
-        [TearDown]
-
-        public void ClosingSteps()
-        { 
-          //driver.Quit();
-        }
-
     }
 }

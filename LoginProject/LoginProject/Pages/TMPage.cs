@@ -40,7 +40,6 @@ namespace LoginProject.Pages
             pricePerunitTextbox.SendKeys("7800");
 
             //Identify Save button and click
-
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
             Thread.Sleep(4000);
