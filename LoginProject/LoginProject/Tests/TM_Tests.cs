@@ -32,7 +32,7 @@ namespace LoginProject.Tests
             homePageObj.GoToTMPage(driver);
 
             //Edit TM
-            tmPageObj.EditTM(driver);
+           //tmPageObj.EditTM(driver);
         }
 
         [Test, Order(3), Description("Check if user is able to delete existing TM record")]

@@ -42,7 +42,7 @@ namespace LoginProject.Pages
             //Identify Save button and click
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
-            Thread.Sleep(4000);
+            Thread.Sleep(5000);
 
             //Got the the last page to Check if the new record is present in the table
 
@@ -105,79 +105,53 @@ namespace LoginProject.Pages
             gototheLastPage.Click();
             Thread.Sleep(4000);
 
-            IWebElement newMCode1 = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
-            IWebElement newMDescription = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[3]"));
-            IWebElement newMPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
-            Thread.Sleep(3000);
-
-            //Check if new Material record added to the last page
-            //Assertion
-            Assert.That(newMCode1.Text == "Sept2022", "Actual code and expected code do not match.");
-            Assert.That(newMDescription.Text == "Auto123", "Actual code and expected code do not match.");
-            Assert.That(newMPrice.Text == "$2,000.00", "Actual code and expected code do not match.");
-
-            
-            //if (NewMaterialCode.Text == "Sept2022")
-
-            //{
-            //    Console.WriteLine("Material new record created sucessfully, test passed");
-
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Material record has not been added, test failed");
-            //}
-
-
+                            
         }
 
-        public void EditTM(IWebDriver driver)
+        public string GetCode(IWebDriver driver)
+        {
+            IWebElement newMCode1 = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
+            return newMCode1.Text;
+        }
+
+        public string GetDescription(IWebDriver driver)
+        {
+            IWebElement newMDescription = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[3]"));
+            return newMDescription.Text;
+        }
+
+        public string GetPrice(IWebDriver driver)
+        {
+            IWebElement newMPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            return newMPrice.Text;
+        }
+
+
+
+        public void EditTM(IWebDriver driver, string description, string code, string price)
 
         {
 
-            //Got the the last page to Check if the new record is present in the table                  
-            Thread.Sleep(4000);
+            //Got the the last page to Check if the new record is present in the table
+            Thread.Sleep(5000);
+            //WaitHelpers.WaitToExists(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]", 3);
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             goToLastPageButton.Click();
-            Thread.Sleep(1500);
+            Thread.Sleep(2500);
 
             IWebElement findRecordCreated =driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
             
-
-            if (findRecordCreated.Text== "Sept2022")
-            {
-                //Click on the Edit Button
-                IWebElement EditButton = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
-                EditButton.Click();
-                Thread.Sleep(3000);
-
-            }
-            else
-            {
-                Assert.Fail("Record to be edited hasn't been found. Record not edited.");
-            }
-            Thread.Sleep(5000);
-
-            ////Identify TypeCode and select Time
-            //IWebElement edittypeCodeDropdown = driver.FindElement(By.XPath("//*[@id=\'TimeMaterialEditForm\']/div/div[1]/div/span[1]/span/span[1]"));
-            //edittypeCodeDropdown.Click();
-            //Thread.Sleep(3000);
-
-            //IWebElement timeOption1 = driver.FindElement(By.XPath("//*[@id=\'TypeCode_listbox\']/li[2]"));
-            //timeOption1.Click();
-            //Thread.Sleep(3000);
-
             //Identify CodeTextBox and Edit Record
-            Thread.Sleep(4000);
+            Thread.Sleep(5000);
             IWebElement editcodeTextBox = driver.FindElement(By.Id("Code"));
             editcodeTextBox.Clear();
-            editcodeTextBox.SendKeys("Manual");
+            editcodeTextBox.SendKeys(code);
             Thread.Sleep(2000);
 
             //Identify DescriptionTextBox and Edit value
             IWebElement descriptionEditTextBox = driver.FindElement(By.Id("Description"));
             descriptionEditTextBox.Clear();
-            descriptionEditTextBox.SendKeys("NewZealand");
+            descriptionEditTextBox.SendKeys(description);
             Thread.Sleep(2000);
 
             //Identify PriceperunitEditTag
@@ -188,7 +162,7 @@ namespace LoginProject.Pages
             //Identify PricePUTextBOX and Edit Value
             IWebElement priceEditTextBox = driver.FindElement(By.Id("Price"));
             priceEditTextBox.Clear();
-            pricePerUnitEditTag .SendKeys("$1,000.00");
+            pricePerUnitEditTag .SendKeys(price);
             Thread.Sleep(3000);
 
             //Identify SaveButton and Click
@@ -202,28 +176,36 @@ namespace LoginProject.Pages
              Thread.Sleep(4000);
 
             //Check if the last record on the TimeMaterial page edited sucessfully
-            IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
-            IWebElement editedDescription = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[3]"));
-            IWebElement editedPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            //IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
+            //IWebElement editedDescription = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[3]"));
+            //IWebElement editedPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
 
-            Assert.That(editedCode.Text == "Manual", "actual code and expected code do not match.");
-            Assert.That(editedDescription.Text == "NewZealand", "actual description and expected description do not match.");
-            Assert.That(editedPrice.Text == "$1,000.00", "actual price and actual price do Not match.");
+           // Assert.That(editedCode.Text == "Manual", "actual code and expected code do not match.");
+           //Assert.That(editedDescription.Text == "NewZealand", "actual description and expected description do not match.");
+           // Assert.That(editedPrice.Text == "$1,000.00", "actual price and actual price do Not match.");
+              
+        }
 
-            //if (editedCode.Text == "Manual" && editedDescription.Text == "NewZealand")
-
-
-            //{
-            //    Console.WriteLine("Record Edited Sucessfully, Test Passed");
-            //}
-            //else
-
-            //{
-            //    Console.WriteLine("Record has not been edited, Test failed");
-            //}
-
+        public string GetEditedDescription(IWebDriver driver)
+        {
+           IWebElement editedDescription = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[3]"));
+            return editedDescription.Text;
 
         }
+
+        public string GetEditedCode(IWebDriver driver)
+        {
+            IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
+            return editedCode.Text;
+        }
+
+        public string GetEditedPrice(IWebDriver driver)
+        {
+            IWebElement editedPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            return editedPrice.Text;
+        }
+
+
         public void DeleteTM(IWebDriver driver)
 
         {
