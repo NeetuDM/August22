@@ -63,14 +63,14 @@ namespace LoginProject.StepDefinitions
         [Then(@"The record should have the updated '([^']*)', '([^']*)' and '([^']*)'")]
         public void ThenTheRecordShouldHaveTheUpdatedAnd(string description, string code, string price)
         {
-            string editedDescription = tmPageObj.GetEditedCode(driver);
+            string editedDescription = tmPageObj.GetEditedDescription(driver);
             string editedCode = tmPageObj.GetEditedCode(driver);
             string editedPrice = tmPageObj.GetEditedPrice(driver);
 
             //Assertion
             Assert.That(editedDescription == description, "actual description and expected description do not match.");
             Assert.That(editedCode == code, "actual code and expected code do not match.");
-            Assert.That(editedPrice == price, "actual price and actual price do Not match.");
+            Assert.That(editedPrice == price, "actual price and expected price do Not match.");
 
         }
 

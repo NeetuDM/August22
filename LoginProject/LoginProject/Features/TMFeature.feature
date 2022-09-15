@@ -16,7 +16,7 @@ Scenario: Create time and material record with valid details
 	Then The record should have the updated '<Description>', '<Code>' and '<Price>'
 
 	Examples: 
-	| Description | Code     | Price |
-	| abc         | Neetu    | 5     |
-	| Material    | Keyboard | 100   |
-	| Updated     | Mouse    | 1500  |
+	| Description | Code     | Price    |
+	| abc         | Neetu    | $5,000.00 |
+	| Material    | Keyboard | $100.00  |
+	| Updated     | Mouse    | $1,500.00 |

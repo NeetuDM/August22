@@ -137,12 +137,15 @@ namespace LoginProject.Pages
             //WaitHelpers.WaitToExists(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]", 3);
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             goToLastPageButton.Click();
-            Thread.Sleep(2500);
+            Thread.Sleep(3000);
 
-            IWebElement findRecordCreated =driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
-            
+            //IWebElement findRecordCreated =driver.FindElement(By.XPath("//*[@id=\'tmsGrid\']/div[3]/table/tbody/tr[last()]/td[1]"));
+           // Click on the Edit Button
+            IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+            editButton.Click();
+            Thread.Sleep(3000);
+
             //Identify CodeTextBox and Edit Record
-            Thread.Sleep(5000);
             IWebElement editcodeTextBox = driver.FindElement(By.Id("Code"));
             editcodeTextBox.Clear();
             editcodeTextBox.SendKeys(code);
@@ -213,7 +216,7 @@ namespace LoginProject.Pages
             // Go to the last page where edited record will be
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
             goToLastPageButton.Click();
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
 
 
             IWebElement findEditedRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
@@ -232,9 +235,9 @@ namespace LoginProject.Pages
 
             else
             {
-                Assert.Fail("Record to be deleted hasn't been found. Record not deleted.");
+               Assert.Fail("Record to be deleted hasn't been found. Record not deleted.");
                
-            }
+           }
            
 
             //Assert that Time record has been deleted.
